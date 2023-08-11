@@ -4,19 +4,19 @@ import AddFriendForm from "./components/AddFriendForm";
 
 const dataFriends = [
   {
-    id: 1,
+    id: "1",
     name: "Jack",
     image: "https://i.pravatar.cc/48?u=14564894",
     balance: -7,
   },
   {
-    id: 2,
+    id: "2",
     name: "John",
     image: "https://i.pravatar.cc/48?u=1897",
     balance: 20,
   },
   {
-    id: 3,
+    id: "3",
     name: "Sarah",
     image: "https://i.pravatar.cc/48?u=96",
     balance: 0,
@@ -30,9 +30,15 @@ const App = () => {
     setFriends((prevFriends) => [...prevFriends, newFriend]);
   };
 
+  const deleteFriend = (id) => {
+    setFriends((prevFriends) =>
+      prevFriends.filter((friend) => friend.id !== id)
+    );
+  };
+
   return (
     <div>
-      <FriendsList friends={friends} />
+      <FriendsList friends={friends} onRemoveFriend={deleteFriend} />
       <AddFriendForm onAddNewFriend={addNewFriend} />
     </div>
   );
