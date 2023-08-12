@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import FriendsList from "./components/FriendsList";
 import AddFriendForm from "./components/AddFriendForm";
+import SplitForm from "./components/SplitForm";
 
 const dataFriends = [
   {
@@ -25,6 +26,7 @@ const dataFriends = [
 
 const App = () => {
   const [friends, setFriends] = useState(dataFriends);
+  const [friendSelected, setFriendSelected] = useState("");
 
   const addNewFriend = (newFriend) => {
     setFriends((prevFriends) => [...prevFriends, newFriend]);
@@ -36,10 +38,32 @@ const App = () => {
     );
   };
 
+  const selectedFriend = (friend) => {
+    setFriendSelected(friend);
+  };
+
+  const calcData = (data) => {
+    console.log(data);
+    setFriends((prevFriends) =>
+      prevFriends.map((friend) =>
+        friend.id === friendSelected.id
+          ? { ...friendSelected, balance: friend.balance + data }
+          : friend
+      )
+    );
+  };
+
   return (
     <div>
-      <FriendsList friends={friends} onRemoveFriend={deleteFriend} />
+      <FriendsList
+        friends={friends}
+        onSelectFriend={selectedFriend}
+        onRemoveFriend={deleteFriend}
+      />
       <AddFriendForm onAddNewFriend={addNewFriend} />
+      {friendSelected && (
+        <SplitForm friend={friendSelected} onCalculatedData={calcData} />
+      )}
     </div>
   );
 };
