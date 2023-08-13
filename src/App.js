@@ -26,7 +26,7 @@ const dataFriends = [
 
 const App = () => {
   const [friends, setFriends] = useState(dataFriends);
-  const [friendSelected, setFriendSelected] = useState("");
+  const [friendSelected, setFriendSelected] = useState(null);
 
   const addNewFriend = (newFriend) => {
     setFriends((prevFriends) => [...prevFriends, newFriend]);
@@ -42,12 +42,12 @@ const App = () => {
     setFriendSelected(friend);
   };
 
-  const calcData = (data) => {
-    console.log(data);
+  const calcData = (splitFriend) => {
+    console.log(splitFriend);
     setFriends((prevFriends) =>
       prevFriends.map((friend) =>
         friend.id === friendSelected.id
-          ? { ...friendSelected, balance: friend.balance + data }
+          ? { ...friendSelected, balance: friend.balance + splitFriend }
           : friend
       )
     );
@@ -59,6 +59,7 @@ const App = () => {
         friends={friends}
         onSelectFriend={selectedFriend}
         onRemoveFriend={deleteFriend}
+        friendSelected={friendSelected}
       />
       <AddFriendForm onAddNewFriend={addNewFriend} />
       {friendSelected && (

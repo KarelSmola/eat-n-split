@@ -3,3 +3,18 @@
   align-items: center;
   gap: 1rem;
 }
+
+.selected {
+  font-weight: 700;
+}
+
+.balance-even {
+}
+
+.balance-positive {
+  color: green;
+}
+
+.balance-negative {
+  color: red;
+}
