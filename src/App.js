@@ -3,6 +3,8 @@ import FriendsList from "./components/FriendsList";
 import AddFriendForm from "./components/AddFriendForm";
 import SplitForm from "./components/SplitForm";
 
+import MainWrapper from "./components/UI/MainWrapper";
+
 const dataFriends = [
   {
     id: "1",
@@ -27,6 +29,7 @@ const dataFriends = [
 const App = () => {
   const [friends, setFriends] = useState(dataFriends);
   const [friendSelected, setFriendSelected] = useState(null);
+  const [showForm, setShowForm] = useState(false);
 
   const addNewFriend = (newFriend) => {
     setFriends((prevFriends) => [...prevFriends, newFriend]);
@@ -39,7 +42,15 @@ const App = () => {
   };
 
   const selectedFriend = (friend) => {
-    setFriendSelected(friend);
+    setFriendSelected((prevFriend) =>
+      prevFriend?.id === friend?.id ? null : friend
+    );
+    setShowForm(false);
+  };
+
+  const showAddForm = () => {
+    setShowForm((prevShow) => !prevShow);
+    setFriendSelected(null);
   };
 
   const calcData = (splitFriend) => {
@@ -54,18 +65,24 @@ const App = () => {
   };
 
   return (
-    <div>
+    <MainWrapper>
       <FriendsList
         friends={friends}
         onSelectFriend={selectedFriend}
         onRemoveFriend={deleteFriend}
         friendSelected={friendSelected}
       />
-      <AddFriendForm onAddNewFriend={addNewFriend} />
+
+      <AddFriendForm
+        onAddNewFriend={addNewFriend}
+        onShowForm={showAddForm}
+        showForm={showForm}
+      />
+
       {friendSelected && (
         <SplitForm friend={friendSelected} onCalculatedData={calcData} />
       )}
-    </div>
+    </MainWrapper>
   );
 };
 

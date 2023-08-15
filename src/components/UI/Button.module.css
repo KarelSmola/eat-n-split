@@ -1,0 +1,15 @@
+.btn-main {
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+.btn-main:hover {
+  scale: 1.05;
+}
+
+.btn-main:active {
+  scale: 0.95;
+}

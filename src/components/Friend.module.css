@@ -1,14 +1,31 @@
 .friend {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 3px orange;
+}
+
+.friend-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.user-img {
+  border-radius: 50%;
 }
 
 .selected {
-  font-weight: 700;
+  background-color: rgb(255, 218, 149);
 }
 
-.balance-even {
+.balance-even,
+.balance-negative,
+.balance-positive {
+  font-size: 1.4rem;
 }
 
 .balance-positive {
@@ -17,4 +34,17 @@
 
 .balance-negative {
   color: red;
+}
+
+.btn-box {
+  display: flex;
+  gap: 1rem;
+}
+
+.select-user-btn {
+  background-color: orange;
+}
+
+.remove-user-btn {
+  background-color: orangered;
 }
